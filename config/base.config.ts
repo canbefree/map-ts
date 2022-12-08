@@ -43,13 +43,16 @@ const baseconfig: Configuration = {
     },
     plugins: [
         new HtmlWebpackPlugin({
-            templateParameters:{
-                key:env_config.key,
-                jscode:env_config.jscode,
+            templateParameters: {
+                key: env_config.key,
+                jscode: env_config.jscode,
             },
             template: path.resolve(rootPath, 'src/template/index.ejs'),
         })
     ],
+    resolve: {
+        extensions: ['.js', '.jsx', '.json', '.ts', '.tsx'],
+    },
 }
 
 
