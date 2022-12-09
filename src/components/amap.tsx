@@ -11,10 +11,9 @@ interface prop {
 }
 
 class AMapComponent extends Component<prop> {
-    map: any
+    map: AMap.Map | undefined;
     constructor(props: prop) {
         super(props);
-        this.map = {}
         this.props.handleChildEvent(this)
     }
     componentDidMount() {
@@ -28,27 +27,21 @@ class AMapComponent extends Component<prop> {
                 'AMap.MapType',
                 'AMap.Geolocation',
             ],               // 需要使用的的插件列表，如比例尺'AMap.Scale'等
-        }).then((AMap) => {
+        }).then((amap) => {
+            var scale = new AMap.Scale({
+                visible: true
+            })
             this.map = new AMap.Map(this.props.id, { //设置地图容器id
                 viewMode: "3D",         //是否为3D地图模式
                 center: [113.9563, 22.5387],
-                zoom: 18,
+                zoom: 15,
             });
-            this.map.addControl(new AMap.ToolBar());
-            this.map.addControl(new AMap.Scale());
-            this.map.addControl(new AMap.Geolocation());
+            this.map.addControl(scale);
+            // this.map.addControl(new amap.Scale());
+            // this.map.addControl(new amap.Geolocation());
 
         }).then(() => {
-            // var marker = new AMap.Marker({
-            //     position: new AMap.LngLat(113.9563, 22.5387),   // 经纬度对象，也可以是经纬度构成的一维数组[116.39, 39.9]
-            //     title: '自定义标点'
-            // });
-            // this.map.add(marker);
-            // var marker = new AMap.Marker({
-            //     position: new AMap.LngLat(113.9561, 22.5382),   // 经纬度对象，也可以是经纬度构成的一维数组[116.39, 39.9]
-            //     title: '自定义标点'
-            // });
-            // this.map.add(marker);
+
         }).catch(e => {
             console.log(e);
         })

@@ -5,6 +5,7 @@ import { Configuration } from 'webpack'
 import WebpackDevServer from 'webpack-dev-server'
 
 const devconfig:Configuration = {
+    mode:"development",
     devServer:{
         host: 'localhost',
         port: '1314',
